@@ -40,7 +40,7 @@ class ModelBuilder (Fields):
         app_name = app
         model_name = model_name
         self.model_body += f"# model {model_name} in app {app_name}\n"
-        self.model_body += f"class {model_name} : \n"
+        self.model_body += f"class {model_name} (models.Model): \n"
         fields = [self.make_dj_field(field_type=i['type'],field_name=i['name']) for i in fields]
         if has_uuid :
             if 'import uuid' not in self.imports:

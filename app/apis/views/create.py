@@ -1,12 +1,13 @@
 from rest_framework import status, decorators
 from rest_framework.response import Response
 from ..serializers import ModelSerailizer
-
+import json
 
 @decorators.api_view(["POST"])
 def CreateModel (request) :
     try:
-        data = request.data
+        data = json.loads(request.data)
+        print(data)
         serializer = ModelSerailizer(data=data)
         if serializer.is_valid() : 
             return Response(serializer.generate_model(),status=status.HTTP_200_OK)
