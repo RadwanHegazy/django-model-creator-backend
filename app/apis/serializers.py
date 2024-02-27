@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from ..model_builder import ModelBuilder
+from app.models import UModel
 
 class ModelSerailizer (serializers.Serializer) : 
     app = serializers.CharField()
@@ -12,4 +13,11 @@ class ModelSerailizer (serializers.Serializer) :
             **self.validated_data
         )
 
-        return model.generate()
+        model = UModel.objects.create(
+            body = model.generate()
+        )
+        model.save()
+        
+        return {
+            'id' : model.id
+        }
